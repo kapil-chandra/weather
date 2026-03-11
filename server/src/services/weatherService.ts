@@ -2,6 +2,7 @@ import axios, { AxiosInstance, AxiosError } from 'axios';
 import { City, CurrentWeather, Forecast, ForecastDay, WeatherService } from '../types/weather.js';
 import { NotFoundError, AppError } from '../errors.js';
 import { config } from '../config.js';
+import * as cacheService from './cacheService.js';
 
 function createAxiosInstance(): AxiosInstance {
   const instance = axios.create({
@@ -75,12 +76,16 @@ class OpenWeatherMapService implements WeatherService {
   }
 
   async getCurrentWeather(city: string): Promise<CurrentWeather> {
+    const cacheKey = `current:${city.toLowerCase()}`;
+    const cached = await cacheService.get(cacheKey);
+    if (cached) return cached;
+
     try {
       const { data } = await http.get('/data/2.5/weather', {
         params: { q: city, appid: this.apiKey },
       });
 
-      return {
+      const result: CurrentWeather = {
         city: data.name,
         country: data.sys.country,
         temp_f: kelvinToFahrenheit(data.main.temp),
@@ -90,6 +95,9 @@ class OpenWeatherMapService implements WeatherService {
         wind_mph: mpsToMph(data.wind.speed),
         icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
       };
+
+      await cacheService.set(cacheKey, result, 10);
+      return result;
     } catch (error) {
       if (error instanceof AppError) throw error;
       handleOwmError(error as AxiosError, city);
@@ -97,6 +105,10 @@ class OpenWeatherMapService implements WeatherService {
   }
 
   async getForecast(city: string): Promise<Forecast> {
+    const cacheKey = `forecast:${city.toLowerCase()}`;
+    const cached = await cacheService.get(cacheKey);
+    if (cached) return cached;
+
     try {
       const { data } = await http.get('/data/2.5/forecast', {
         params: { q: city, appid: this.apiKey },
@@ -107,7 +119,6 @@ class OpenWeatherMapService implements WeatherService {
 
       for (const item of data.list) {
         const date = item.dt_txt.split(' ')[0];
-        // Skip today — we only want the next 5 days
         const today = new Date().toISOString().split('T')[0];
         if (date === today) continue;
 
@@ -141,11 +152,14 @@ class OpenWeatherMapService implements WeatherService {
         });
       }
 
-      return {
+      const result: Forecast = {
         city: data.city.name,
         country: data.city.country,
         forecast,
       };
+
+      await cacheService.set(cacheKey, result, 30);
+      return result;
     } catch (error) {
       if (error instanceof AppError) throw error;
       handleOwmError(error as AxiosError, city);

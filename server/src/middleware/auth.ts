@@ -21,3 +21,15 @@ export function requireAuth(req: Request, _res: Response, next: NextFunction): v
   req.user = verifyToken(token);
   next();
 }
+
+export function optionalAuth(req: Request, _res: Response, next: NextFunction): void {
+  const header = req.headers.authorization;
+  if (header?.startsWith('Bearer ')) {
+    try {
+      req.user = verifyToken(header.slice(7));
+    } catch {
+      // Token invalid — proceed without user
+    }
+  }
+  next();
+}

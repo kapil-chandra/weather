@@ -37,9 +37,9 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
-router.get('/me', requireAuth, (req, res, next) => {
+router.get('/me', requireAuth, async (req, res, next) => {
   try {
-    const user = authService.getUserById(req.user!.id);
+    const user = await authService.getUserById(req.user!.id);
     if (!user) {
       throw new Error('User not found');
     }

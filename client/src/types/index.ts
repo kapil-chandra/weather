@@ -45,3 +45,18 @@ export interface ApiError {
   code: string;
   message: string;
 }
+
+export interface Favorite {
+  id: number;
+  user_id: number;
+  city: string;
+  country: string;
+  created_at: string;
+}
+
+export interface SearchHistoryItem {
+  id: number;
+  user_id: number;
+  city: string;
+  searched_at: string;
+}

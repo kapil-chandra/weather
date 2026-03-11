@@ -6,9 +6,12 @@ interface Props {
   loading: boolean;
   useCelsius: boolean;
   onToggleUnit: () => void;
+  isFavorited: boolean;
+  onToggleFavorite: () => void;
+  showFavoriteBtn: boolean;
 }
 
-export function CurrentWeather({ data, loading, useCelsius, onToggleUnit }: Props) {
+export function CurrentWeather({ data, loading, useCelsius, onToggleUnit, isFavorited, onToggleFavorite, showFavoriteBtn }: Props) {
   if (loading) {
     return (
       <section className={styles.card} aria-label="Loading weather data">
@@ -34,7 +37,19 @@ export function CurrentWeather({ data, loading, useCelsius, onToggleUnit }: Prop
     <section className={styles.card} aria-label={`Current weather in ${data.city}`}>
       <div className={styles.top}>
         <div>
-          <h2 className={styles.city}>{data.city}, <span className={styles.country}>{data.country}</span></h2>
+          <h2 className={styles.city}>
+            {data.city}, <span className={styles.country}>{data.country}</span>
+            {showFavoriteBtn && (
+              <button
+                className={`${styles.favBtn} ${isFavorited ? styles.favActive : ''}`}
+                onClick={onToggleFavorite}
+                aria-label={isFavorited ? `Remove ${data.city} from favorites` : `Add ${data.city} to favorites`}
+                type="button"
+              >
+                {isFavorited ? '\u2605' : '\u2606'}
+              </button>
+            )}
+          </h2>
           <p className={styles.description}>{data.description}</p>
         </div>
         {data.icon && (

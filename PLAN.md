@@ -162,55 +162,55 @@ At this point: fully functional weather dashboard with search, current weather, 
 ## Phase 4 — Database & Full Stack (Epic 4)
 
 ### 4.1 Database Setup
-- [ ] Install `better-sqlite3` and `knex` in server
-- [ ] Create `server/knexfile.ts` pointing to `./dev.sqlite3`
-- [ ] Create `server/src/db/connection.ts` — Knex instance
-- [ ] Create migration: `users` table
-- [ ] Create migration: `favorites` table (with country column, unique constraint on user_id + city)
-- [ ] Create migration: `search_history` table
-- [ ] Create migration: `weather_cache` table
-- [ ] Run migrations
+- [x] Install `better-sqlite3` and `knex` in server
+- [x] Create `server/knexfile.ts` pointing to `./dev.sqlite3`
+- [x] Create `server/src/db/connection.ts` — Knex instance
+- [x] Create migration: `users` table
+- [x] Create migration: `favorites` table (with country column, unique constraint on user_id + city)
+- [x] Create migration: `search_history` table
+- [x] Create migration: `weather_cache` table
+- [x] Run migrations
 
 ### 4.2 Migrate Auth to Database
-- [ ] Update `authService.ts` to use Knex queries against `users` table instead of in-memory Map
-- [ ] Ensure register checks for duplicate email (handle UNIQUE constraint)
-- [ ] Verify login, register, and `/api/auth/me` all work with DB
+- [x] Update `authService.ts` to use Knex queries against `users` table instead of in-memory Map
+- [x] Ensure register checks for duplicate email (handle UNIQUE constraint)
+- [x] Verify login, register, and `/api/auth/me` all work with DB
 
 ### 4.3 Favorites Feature
-- [ ] Create `server/src/routes/favorites.ts`
+- [x] Create `server/src/routes/favorites.ts`
   - `GET /api/favorites` — list user's favorites
   - `POST /api/favorites` — add city + country to favorites (handle duplicate with 409)
   - `DELETE /api/favorites/:id` — remove favorite (verify ownership, 404 if not found)
-- [ ] All routes protected with auth middleware
-- [ ] Create `client/src/components/FavoritesList/`
+- [x] All routes protected with auth middleware
+- [x] Create `client/src/components/FavoritesList/`
   - List of favorite cities with star icon
   - Click a favorite to load its weather
   - Unfavorite button on each item
-- [ ] Add star/unstar toggle to CurrentWeather display
-- [ ] Create `client/src/api/favorites.ts` — `getFavorites()`, `addFavorite(city, country)`, `removeFavorite(id)`
+- [x] Add star/unstar toggle to CurrentWeather display
+- [x] Create `client/src/api/favorites.ts` — `getFavorites()`, `addFavorite(city, country)`, `removeFavorite(id)`
 
 ### 4.4 Search History
-- [ ] Modify `GET /api/weather/current/:city` — optionally parse auth token (don't require it); if user is authenticated, record search in `search_history`
-- [ ] Create `server/src/routes/history.ts` (or add to weather routes)
+- [x] Modify `GET /api/weather/current/:city` — optionally parse auth token (don't require it); if user is authenticated, record search in `search_history`
+- [x] Create `server/src/routes/history.ts` (or add to weather routes)
   - `GET /api/history?limit=10` — return recent searches for current user
-- [ ] Create `client/src/components/RecentSearches/`
+- [x] Create `client/src/components/RecentSearches/`
   - Sidebar showing last 10 searches
   - Click to re-search that city
   - Only visible when logged in
-- [ ] Add to Dashboard layout
+- [x] Add to Dashboard layout
 
 ### 4.5 Weather Cache
-- [ ] Create `server/src/services/cacheService.ts`
+- [x] Create `server/src/services/cacheService.ts`
   - `get(key)` — check `weather_cache`, return data if not expired, null otherwise
   - `set(key, data, ttlMinutes)` — upsert into `weather_cache`
   - `cleanup()` — delete expired entries
-- [ ] Integrate into weatherService: check cache before calling OpenWeatherMap
+- [x] Integrate into weatherService: check cache before calling OpenWeatherMap
   - Current weather TTL: 10 minutes
   - Forecast TTL: 30 minutes
-- [ ] Run `cleanup()` on server startup
+- [x] Run `cleanup()` on server startup
 
 ### 4.6 End-to-End User Journey
-- [ ] Verify complete flow:
+- [x] Verify complete flow:
   1. User opens app, sees empty dashboard with search bar
   2. Searches for a city, sees current weather + forecast
   3. Signs up / logs in
