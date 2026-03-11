@@ -97,62 +97,62 @@ At this point: real weather data from OpenWeatherMap, temp in both units, icons,
 ## Phase 3 — Frontend Dashboard (Epic 3)
 
 ### 3.1 Project Scaffolding
-- [ ] Create `client/` with Vite + React + TypeScript template
-- [ ] Install deps: axios, react-router-dom
-- [ ] Configure Vite proxy: `/api` -> `http://localhost:3001`
-- [ ] Set up basic `App.tsx` with React Router (Dashboard and Login routes)
-- [ ] Create `client/src/types/` with shared TypeScript types matching API contracts
+- [x] Create `client/` with Vite + React + TypeScript template
+- [x] Install deps: axios, react-router-dom
+- [x] Configure Vite proxy: `/api` -> `http://localhost:3001`
+- [x] Set up basic `App.tsx` with React Router (Dashboard and Login routes)
+- [x] Create `client/src/types/` with shared TypeScript types matching API contracts
 
 ### 3.2 API Client Layer
-- [ ] Create `client/src/api/client.ts` — Axios instance with:
+- [x] Create `client/src/api/client.ts` — Axios instance with:
   - Base URL pointing to `/api`
   - Request interceptor to attach Bearer token from localStorage
   - Response interceptor for 401 handling (clear token, redirect to login)
-- [ ] Create `client/src/api/weather.ts` — `getCurrentWeather(city)`, `getForecast(city)`, `searchCities(query)`
-- [ ] Create `client/src/api/auth.ts` — `register(...)`, `login(...)`, `getMe()`
+- [x] Create `client/src/api/weather.ts` — `getCurrentWeather(city)`, `getForecast(city)`, `searchCities(query)`
+- [x] Create `client/src/api/auth.ts` — `register(...)`, `login(...)`, `getMe()`
 
 ### 3.3 Auth Context & Login Page
-- [ ] Create `client/src/context/AuthContext.tsx`
+- [x] Create `client/src/context/AuthContext.tsx`
   - Provides: `user`, `token`, `login()`, `register()`, `logout()`, `isAuthenticated`
   - Persists token in localStorage, loads user on mount via `/api/auth/me`
-- [ ] Create `client/src/pages/Login.tsx` — login/signup form with toggle
-- [ ] Create `client/src/components/LoginForm/` — email, password, name (for signup) fields
+- [x] Create `client/src/pages/Login.tsx` — login/signup form with toggle
+- [x] Create `client/src/components/LoginForm/` — email, password, name (for signup) fields
   - Form validation, loading state, error display
   - Redirect to dashboard on success
 
 ### 3.4 Layout & Navigation
-- [ ] Create `client/src/components/Layout/` — app shell with header, main content area
+- [x] Create `client/src/components/Layout/` — app shell with header, main content area
   - Header: app title, user name + logout button (when logged in), login link (when not)
   - Responsive: hamburger menu on mobile
-- [ ] CSS Modules for all styling, mobile-first approach
+- [x] CSS Modules for all styling, mobile-first approach
 
 ### 3.5 Search Bar
-- [ ] Create `client/src/hooks/useDebounce.ts` — debounces a value by 300ms
-- [ ] Create `client/src/components/SearchBar/`
+- [x] Create `client/src/hooks/useDebounce.ts` — debounces a value by 300ms
+- [x] Create `client/src/components/SearchBar/`
   - Text input with autocomplete dropdown
   - On typing: debounced call to `/api/weather/search`
   - On selecting a city: fetch current weather + forecast
   - Keyboard accessible: arrow keys to navigate suggestions, Enter to select, Escape to close
 
 ### 3.6 Weather Display
-- [ ] Create `client/src/components/CurrentWeather/`
+- [x] Create `client/src/components/CurrentWeather/`
   - Shows: city name, temperature (toggle °F/°C), condition text, icon, humidity, wind
   - Loading skeleton while fetching
-- [ ] Create `client/src/components/ForecastCard/`
+- [x] Create `client/src/components/ForecastCard/`
   - 5 cards in a horizontal row (scrollable on mobile)
   - Each card: day name, icon, high/low temps
-- [ ] Create `client/src/pages/Dashboard.tsx` — composes SearchBar, CurrentWeather, ForecastCards
+- [x] Create `client/src/pages/Dashboard.tsx` — composes SearchBar, CurrentWeather, ForecastCards
 
 ### 3.7 Error & Loading States
-- [ ] Loading spinner component for data fetches
-- [ ] Friendly error messages ("City not found", "Something went wrong, please try again")
-- [ ] Empty state when no city is selected yet
+- [x] Loading spinner component for data fetches
+- [x] Friendly error messages ("City not found", "Something went wrong, please try again")
+- [x] Empty state when no city is selected yet
 
 ### 3.8 Responsive & Accessibility
-- [ ] Test layout at mobile (375px), tablet (768px), desktop (1024px+)
-- [ ] Ensure all interactive elements have focus indicators
-- [ ] ARIA labels on icon-only buttons
-- [ ] Semantic HTML (main, nav, section, article for forecast cards)
+- [x] Test layout at mobile (375px), tablet (768px), desktop (1024px+)
+- [x] Ensure all interactive elements have focus indicators
+- [x] ARIA labels on icon-only buttons
+- [x] Semantic HTML (main, nav, section, article for forecast cards)
 
 ### Phase 3 Checkpoint
 At this point: fully functional weather dashboard with search, current weather, forecast, login/signup, responsive design, keyboard accessible.

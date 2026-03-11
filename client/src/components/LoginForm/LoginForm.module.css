@@ -1,0 +1,134 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 1.5rem;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  animation: fadeUp 0.5s ease-out;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.25rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0 0 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.input {
+  background: var(--input-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.error {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  font-size: 0.85rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: 8px;
+  margin: 0;
+}
+
+.button {
+  background: var(--accent);
+  color: #0f172a;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 0.25rem;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.toggle {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  margin-top: 1.25rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.toggle:hover {
+  background: rgba(251, 191, 36, 0.08);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}

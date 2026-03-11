@@ -1,0 +1,159 @@
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2rem;
+  animation: fadeUp 0.45s ease-out;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.city {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.country {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.description {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0;
+  text-transform: capitalize;
+}
+
+.icon {
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.tempRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.25rem;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.temp {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+}
+
+.unitToggle {
+  background: none;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.unitToggle:hover {
+  background: rgba(251, 191, 36, 0.1);
+  border-color: var(--accent);
+}
+
+.unitToggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.detailLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.detailValue {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.divider {
+  width: 1px;
+  height: 2rem;
+  background: var(--glass-border);
+}
+
+/* Skeleton loading */
+.skeleton {
+  display: flex;
+  flex-direction: column;
+}
+
+.skelLine {
+  background: linear-gradient(90deg, var(--glass-border) 25%, rgba(255,255,255,0.06) 50%, var(--glass-border) 75%);
+  background-size: 200% 100%;
+  border-radius: 6px;
+  animation: shimmer 1.5s infinite;
+}
+
+.skelRow {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  to { background-position: -200% 0; }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1.5rem;
+  }
+
+  .temp {
+    font-size: 3.5rem;
+  }
+
+  .icon {
+    width: 60px;
+    height: 60px;
+  }
+}
