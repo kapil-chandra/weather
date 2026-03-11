@@ -1,5 +1,5 @@
 import client from './client';
-import { AuthResult, SafeUser } from '../types';
+import type { AuthResult, SafeUser } from '../types';
 
 export async function register(email: string, password: string, name: string): Promise<AuthResult> {
   const { data } = await client.post<{ data: AuthResult }>('/auth/register', { email, password, name });

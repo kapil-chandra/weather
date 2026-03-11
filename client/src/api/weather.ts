@@ -1,5 +1,5 @@
 import client from './client';
-import { CurrentWeather, Forecast, City } from '../types';
+import type { CurrentWeather, Forecast, City } from '../types';
 
 export async function getCurrentWeather(city: string): Promise<CurrentWeather> {
   const { data } = await client.get<{ data: CurrentWeather }>(`/weather/current/${encodeURIComponent(city)}`);
