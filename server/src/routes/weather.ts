@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { z } from 'zod';
 import { weatherService } from '../services/weatherService.js';
 import { sendSuccess } from '../helpers.js';
+import { searchLimiter } from '../middleware/rateLimiter.js';
 
 const router = Router();
 
@@ -29,7 +30,7 @@ const searchQuerySchema = z.object({
   q: z.string().min(2, 'Search query must be at least 2 characters'),
 });
 
-router.get('/search', async (req, res, next) => {
+router.get('/search', searchLimiter, async (req, res, next) => {
   try {
     const { q } = searchQuerySchema.parse(req.query);
     const cities = await weatherService.searchCities(q);

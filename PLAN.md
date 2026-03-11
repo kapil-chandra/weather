@@ -63,31 +63,31 @@ At this point: all weather and auth endpoints work with mock/in-memory data, con
 ## Phase 2 — API Integration (Epic 2)
 
 ### 2.1 OpenWeatherMap Integration
-- [ ] Sign up for OpenWeatherMap API key, add to `.env`
-- [ ] Replace mock `weatherService.ts` with real implementation:
+- [x] Sign up for OpenWeatherMap API key, add to `.env`
+- [x] Replace mock `weatherService.ts` with real implementation:
   - `getCurrentWeather(city)` — calls OWM Current Weather API, maps response to our shape (both °F and °C)
   - `getForecast(city)` — calls OWM 5-day/3-hour API, aggregates into daily highs/lows
   - `searchCities(query)` — calls OWM Geocoding API
-- [ ] Map OWM icon codes to icon URLs (`https://openweathermap.org/img/wn/{code}@2x.png`)
-- [ ] Handle OWM API errors gracefully (key invalid, rate limit, city not found)
+- [x] Map OWM icon codes to icon URLs (`https://openweathermap.org/img/wn/{code}@2x.png`)
+- [x] Handle OWM API errors gracefully (key invalid, rate limit, city not found)
 
 ### 2.2 Retry Logic
-- [ ] Add Axios instance in weatherService with retry interceptor
-- [ ] Exponential backoff: 3 retries, delays of 1s, 2s, 4s
-- [ ] Only retry on 5xx errors and network failures, not 4xx
+- [x] Add Axios instance in weatherService with retry interceptor
+- [x] Exponential backoff: 3 retries, delays of 1s, 2s, 4s
+- [x] Only retry on 5xx errors and network failures, not 4xx
 
 ### 2.3 Rate Limiting
-- [ ] Install `express-rate-limit`
-- [ ] Create `server/src/middleware/rateLimiter.ts` with three tiers:
+- [x] Install `express-rate-limit`
+- [x] Create `server/src/middleware/rateLimiter.ts` with three tiers:
   - Global: 100 req / 15 min per IP
   - Auth routes: 10 req / 15 min per IP
   - Search route: 30 req / 1 min per IP
-- [ ] Apply rate limiters to appropriate routes
+- [x] Apply rate limiters to appropriate routes
 
 ### 2.4 Protected Routes
-- [ ] Apply auth middleware to routes that will need it in Phase 4 (favorites, history)
-- [ ] Ensure weather routes remain public
-- [ ] Verify `GET /api/auth/me` requires valid token
+- [x] Apply auth middleware to routes that will need it in Phase 4 (favorites, history)
+- [x] Ensure weather routes remain public
+- [x] Verify `GET /api/auth/me` requires valid token
 
 ### Phase 2 Checkpoint
 At this point: real weather data from OpenWeatherMap, temp in both units, icons, rate limiting, retry on failures, auth middleware ready for protected routes.
