@@ -37,7 +37,7 @@ export function RecentSearches({ onSelectCity, refreshKey }: Props) {
 
   return (
     <section className={styles.section} aria-label="Recent searches">
-      <h3 className={styles.heading}>Recent</h3>
+      <h3 className={styles.heading}>RECENT</h3>
       <ul className={styles.list}>
         {unique.map((item) => (
           <li key={item.id}>
@@ -46,7 +46,7 @@ export function RecentSearches({ onSelectCity, refreshKey }: Props) {
               onClick={() => onSelectCity(item.city)}
               type="button"
             >
-              <span className={styles.icon} aria-hidden="true">&#128269;</span>
+              <span className={styles.icon} aria-hidden="true">{'\u2192'}</span>
               <span className={styles.city}>{item.city}</span>
             </button>
           </li>

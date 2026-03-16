@@ -38,7 +38,7 @@ export function FavoritesList({ onSelectCity, refreshKey }: Props) {
 
   return (
     <section className={styles.section} aria-label="Favorite cities">
-      <h3 className={styles.heading}>Favorites</h3>
+      <h3 className={styles.heading}>SAVED STATIONS</h3>
       <ul className={styles.list}>
         {favorites.map((fav) => (
           <li key={fav.id} className={styles.item}>
@@ -47,7 +47,7 @@ export function FavoritesList({ onSelectCity, refreshKey }: Props) {
               onClick={() => onSelectCity(fav.city)}
               type="button"
             >
-              <span className={styles.star} aria-hidden="true">&#9733;</span>
+              <span className={styles.star} aria-hidden="true">{'\u2605'}</span>
               <span className={styles.name}>{fav.city}</span>
               <span className={styles.country}>{fav.country}</span>
             </button>
@@ -57,7 +57,7 @@ export function FavoritesList({ onSelectCity, refreshKey }: Props) {
               aria-label={`Remove ${fav.city} from favorites`}
               type="button"
             >
-              &times;
+              {'\u00D7'}
             </button>
           </li>
         ))}

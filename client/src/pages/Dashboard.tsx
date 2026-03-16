@@ -94,16 +94,16 @@ export function Dashboard() {
 
         {error && (
           <div className={styles.errorCard} role="alert">
-            <span className={styles.errorIcon} aria-hidden="true">!</span>
+            <span className={styles.errorIcon} aria-hidden="true">ERROR:</span>
             <p className={styles.errorText}>{error}</p>
           </div>
         )}
 
         {!hasSearched && !loading && (
           <div className={styles.empty}>
-            <span className={styles.emptyIcon} aria-hidden="true">&#9729;</span>
-            <h2 className={styles.emptyTitle}>Explore the weather</h2>
-            <p className={styles.emptyText}>Search for any city to see current conditions and a 5-day forecast.</p>
+            <span className={styles.emptyIcon} aria-hidden="true">NIMBUS WEATHER TERMINAL</span>
+            <h2 className={styles.emptyTitle}>SEARCH A STATION</h2>
+            <p className={styles.emptyText}>Enter a city above to view current conditions and 5-day forecast data.</p>
           </div>
         )}
 
