@@ -33,23 +33,20 @@ export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.card}>
-        <h1 className={styles.title}>{isSignup ? 'Create account' : 'Welcome back'}</h1>
-        <p className={styles.subtitle}>
-          {isSignup ? 'Start tracking your weather' : 'Sign in to your dashboard'}
-        </p>
+      <div className={styles.form}>
+        <span className={styles.formLabel}>AUTHENTICATION</span>
+        <h1 className={styles.title}>{isSignup ? 'REGISTER' : 'SIGN IN'}</h1>
 
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form onSubmit={handleSubmit} className={styles.fields}>
           {isSignup && (
             <div className={styles.field}>
-              <label htmlFor="name" className={styles.label}>Name</label>
+              <label htmlFor="name" className={styles.label}>NAME</label>
               <input
                 id="name"
                 type="text"
                 className={styles.input}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Your name"
                 required
                 autoComplete="name"
               />
@@ -57,38 +54,40 @@ export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
           )}
 
           <div className={styles.field}>
-            <label htmlFor="email" className={styles.label}>Email</label>
+            <label htmlFor="email" className={styles.label}>EMAIL</label>
             <input
               id="email"
               type="email"
               className={styles.input}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
               required
               autoComplete="email"
             />
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="password" className={styles.label}>Password</label>
+            <label htmlFor="password" className={styles.label}>PASSWORD</label>
             <input
               id="password"
               type="password"
               className={styles.input}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder={isSignup ? 'Min 8 characters' : 'Your password'}
               required
               minLength={isSignup ? 8 : undefined}
               autoComplete={isSignup ? 'new-password' : 'current-password'}
             />
           </div>
 
-          {error && <p className={styles.error} role="alert">{error}</p>}
+          {error && (
+            <div className={styles.error} role="alert">
+              ERROR: {error.toUpperCase()}
+            </div>
+          )}
 
           <button type="submit" className={styles.button} disabled={loading}>
-            {loading ? 'Please wait\u2026' : isSignup ? 'Create account' : 'Sign in'}
+            {loading ? 'PLEASE WAIT\u2026' : isSignup ? 'REGISTER \u2192' : 'AUTHENTICATE \u2192'}
           </button>
         </form>
 
@@ -97,7 +96,11 @@ export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
           className={styles.toggle}
           onClick={() => { setIsSignup(!isSignup); setError(''); }}
         >
-          {isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
+          {isSignup ? (
+            <>HAVE AN ACCOUNT? <span className={styles.toggleAction}>SIGN IN</span></>
+          ) : (
+            <>NO ACCOUNT? <span className={styles.toggleAction}>REGISTER</span></>
+          )}
         </button>
       </div>
     </div>
