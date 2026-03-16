@@ -12,6 +12,15 @@ export interface CurrentWeather {
   humidity: number;
   wind_mph: number;
   icon: string;
+  // New fields for brutalist redesign
+  feels_like_f: number;
+  feels_like_c: number;
+  pressure: number;        // hPa
+  wind_direction: number;  // degrees 0-360
+  temp_high_f: number | null;
+  temp_high_c: number | null;
+  temp_low_f: number | null;
+  temp_low_c: number | null;
 }
 
 export interface ForecastDay {
