@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { config } from './config.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { globalLimiter, authLimiter } from './middleware/rateLimiter.js';
@@ -10,6 +12,8 @@ import favoritesRoutes from './routes/favorites.js';
 import historyRoutes from './routes/history.js';
 import db from './db/connection.js';
 import * as cacheService from './services/cacheService.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 
@@ -24,6 +28,17 @@ app.use('/api/favorites', favoritesRoutes);
 app.use('/api/history', historyRoutes);
 
 app.use(errorHandler);
+
+// In production, serve the client's built static files
+if (config.nodeEnv !== 'development') {
+  const clientDistPath = path.resolve(__dirname, '../../client/dist');
+  app.use(express.static(clientDistPath));
+
+  // Catch-all: serve index.html for client-side routing
+  app.get('*', (_req, res) => {
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+}
 
 async function start() {
   await db.migrate.latest();
