@@ -11,19 +11,19 @@ export function Layout({ children }: { children: ReactNode }) {
       <header className={styles.header}>
         <nav className={styles.nav}>
           <Link to="/" className={styles.brand}>
-            <span className={styles.brandIcon} aria-hidden="true">&#9729;</span>
-            Nimbus
+            <span className={styles.brandName}>NIMBUS</span>
+            <span className={styles.brandSub}>WEATHER TERMINAL</span>
           </Link>
           <div className={styles.actions}>
             {isAuthenticated ? (
               <>
-                <span className={styles.userName}>{user?.name}</span>
+                <span className={styles.userName}>{user?.name?.toUpperCase()}</span>
                 <button className={styles.logoutBtn} onClick={logout} type="button">
-                  Sign out
+                  LOGOUT
                 </button>
               </>
             ) : (
-              <Link to="/login" className={styles.loginLink}>Sign in</Link>
+              <Link to="/login" className={styles.loginLink}>SIGN IN</Link>
             )}
           </div>
         </nav>
