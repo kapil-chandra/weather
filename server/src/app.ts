@@ -35,7 +35,7 @@ if (config.nodeEnv !== 'development') {
   app.use(express.static(clientDistPath));
 
   // Catch-all: serve index.html for client-side routing
-  app.get('*', (_req, res) => {
+  app.get('{*path}', (_req, res) => {
     res.sendFile(path.join(clientDistPath, 'index.html'));
   });
 }
