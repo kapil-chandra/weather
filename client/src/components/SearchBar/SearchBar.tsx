@@ -50,7 +50,7 @@ export function SearchBar({ onSelectCity }: Props) {
   }, [debounced]);
 
   function select(city: City) {
-    setQuery(city.name);
+    setQuery(`${city.name}, ${city.country}`);
     setIsOpen(false);
     onSelectCity(city.name);
     inputRef.current?.blur();
@@ -75,9 +75,9 @@ export function SearchBar({ onSelectCity }: Props) {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.searchRow}>
+      <span className={styles.label}>STATION:</span>
       <div className={styles.inputWrap}>
-        <span className={styles.icon} aria-hidden="true">&#x1F50D;</span>
         <input
           ref={inputRef}
           className={styles.input}
@@ -87,7 +87,7 @@ export function SearchBar({ onSelectCity }: Props) {
           onKeyDown={handleKeyDown}
           onFocus={() => results.length > 0 && setIsOpen(true)}
           onBlur={() => setTimeout(() => setIsOpen(false), 200)}
-          placeholder="Search for a city\u2026"
+          placeholder="SEARCH CITY..."
           role="combobox"
           aria-expanded={isOpen}
           aria-controls="city-listbox"
@@ -95,8 +95,9 @@ export function SearchBar({ onSelectCity }: Props) {
           aria-label="Search for a city"
           autoComplete="off"
         />
-        {loading && <span className={styles.spinner} aria-label="Loading" />}
+        {loading && <div className={styles.progressBar} />}
       </div>
+      <span className={styles.searchBtn} aria-hidden="true">SEARCH</span>
 
       {isOpen && (
         <ul

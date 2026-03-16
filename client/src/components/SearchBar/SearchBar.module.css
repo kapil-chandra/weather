@@ -1,36 +1,35 @@
-.wrapper {
+.searchRow {
   position: relative;
-  max-width: 520px;
-  width: 100%;
-  margin: 0 auto 2.5rem;
+  border-bottom: var(--border-major) solid var(--border-primary);
+  padding: 10px var(--space-container);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  color: var(--text-primary);
 }
 
 .inputWrap {
+  flex: 1;
   position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.icon {
-  position: absolute;
-  left: 1rem;
-  font-size: 1rem;
-  opacity: 0.5;
-  pointer-events: none;
+  border: var(--border-minor) solid var(--border-primary);
 }
 
 .input {
   width: 100%;
-  background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
-  border-radius: 14px;
-  padding: 0.875rem 2.75rem 0.875rem 2.75rem;
-  font-size: 1rem;
+  background: var(--bg-input);
+  border: none;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
   color: var(--text-primary);
-  font-family: var(--font-body);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: var(--font-family);
 }
 
 .input::placeholder {
@@ -39,71 +38,87 @@
 
 .input:focus {
   outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
-.spinner {
+.progressBar {
   position: absolute;
-  right: 1rem;
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--glass-border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background: var(--bg-active);
+  animation: progress 1s ease-in-out infinite;
+}
+
+@keyframes progress {
+  0% { width: 0; left: 0; }
+  50% { width: 60%; left: 20%; }
+  100% { width: 0; left: 100%; }
+}
+
+.searchBtn {
+  background: var(--bg-active);
+  color: var(--text-inverse);
+  border: var(--border-minor) solid var(--border-primary);
+  padding: 8px 12px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
 }
 
 .dropdown {
   position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  right: 0;
-  background: var(--surface);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
+  top: 100%;
+  left: var(--space-container);
+  right: var(--space-container);
+  background: var(--bg-primary);
+  border: var(--border-minor) solid var(--border-primary);
+  border-top: none;
   list-style: none;
   margin: 0;
-  padding: 0.375rem;
+  padding: 0;
   max-height: 280px;
   overflow-y: auto;
   z-index: 50;
-  animation: fadeIn 0.15s ease-out;
 }
 
 .option {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.625rem 0.875rem;
-  border-radius: 8px;
+  padding: 8px 12px;
   cursor: pointer;
-  transition: background 0.12s;
+  border-bottom: var(--border-subtle) solid var(--border-secondary);
+}
+
+.option:last-child {
+  border-bottom: none;
 }
 
 .option:hover,
 .active {
-  background: rgba(251, 191, 36, 0.08);
+  background: var(--bg-hover);
 }
 
 .cityName {
   color: var(--text-primary);
+  font-size: 13px;
   font-weight: 500;
 }
 
 .country {
   color: var(--text-muted);
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
+@media (max-width: 480px) {
+  .searchBtn {
+    font-size: 0;
+  }
+  .searchBtn::after {
+    content: 'GO';
+    font-size: 9px;
+  }
 }
